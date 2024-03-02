@@ -1,0 +1,84 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGODB_URL")
+}
+
+model User {
+  id String @id @db.ObjectId @map("_id") @default(auto())
+  name String?
+  email String? @unique
+  emailVerified DateTime?
+  image String?
+  password String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  // isValid Boolean @default(true)
+  // favorates are weak connections
+  favoriteIds String[] @db.ObjectId
+
+  accounts Account[]
+  properties Property[]
+  reservation Reservation[]
+}
+
+model Account {
+  id String @id @db.ObjectId @map("_id") @default(auto())
+  userId String @db.ObjectId
+  type String
+  provider String
+  providerAccountId String
+  refresh_token String?
+  access_token String?
+  expires_at Int?
+  token_type String?
+  scope String?
+  id_token String?
+  session_state String?
+
+  // relation
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // restriction
+  @@unique([provider, providerAccountId])
+}
+
+model Property {
+  id String @id @db.ObjectId @map("_id") @default(auto())
+  userId String @db.ObjectId
+  category String
+  price Int
+  title String
+  description String
+  images String[]
+  bedroomCount Int
+  bathroomCount Int
+  guestCount Int
+  address String
+  location Float[]
+  createAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reservations Reservation[]
+
+  @@index(location, map: "2dsphere")
+}
+
+model Reservation {
+  id String @id @db.ObjectId @map("_id") @default(auto())
+  userId String @db.ObjectId
+  propertyId String @db.ObjectId
+  startAt DateTime
+  endAt DateTime
+  totalPrice Int
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  place Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+}
