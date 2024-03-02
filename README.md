@@ -1,9 +1,10 @@
 # EasyHome
 
-- A demo project for hand-on practice based on Next.js, NextAuth, TailwindCSS, MongoDB, Prisma and MapBox.
-- There are features not finished and issues with or without TODO.
-- No UI library used, not optimal, it's just for practicing HTML/CSS/TypeScript
-- The features are simple and some following [Airbnb Clone](https://github.com/AntonioErdeljac/next13-airbnb-clone).
+- Hands-on practice project; not fully optimized
+- Focus on HTML/CSS/TypeScript without UI libraries
+- Utilizes Next.js, NextAuth, TailwindCSS, MongoDB, Prisma, and MapBox
+- Incomplete features and issues present, some marked with TODOs
+- Includes basic features, some inspired by [Airbnb Clone](https://github.com/AntonioErdeljac/next13-airbnb-clone).
 
 ## Quick Start
 
@@ -14,4 +15,5 @@ npm run dev
 
 ## Local Enviroment
 
-Fullfill the parameters in .env.example and remove .example in the tail.
+- Fill in the necessary values in the .env.example file for all required parameters.
+- Rename the file from .env.example to .env by removing the .example extension.
