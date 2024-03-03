@@ -16,11 +16,13 @@ interface Props {
 const PropertyImages: React.FC<Props> = ({ property, currentUser }) => {
   const [imagesIdx, setImagesIdx] = useState(0);
 
-  const nextImage = () => {
+  const nextImage = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
     setImagesIdx((prevIndex) => (prevIndex + 1) % property.images.length);
   };
 
-  const prevImage = () => {
+  const prevImage = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
     setImagesIdx(
       (prevIndex) =>
         (prevIndex - 1 + property.images.length) % property.images.length,
@@ -75,7 +77,7 @@ const PropertyImages: React.FC<Props> = ({ property, currentUser }) => {
               useDark={true}
               isSmall={true}
               isOutline={true}
-              onClick={prevImage}
+              onClick={(e) => prevImage(e)}
             >
               <FaAngleLeft size={20} />
             </IconBox>
@@ -93,7 +95,7 @@ const PropertyImages: React.FC<Props> = ({ property, currentUser }) => {
               useDark={true}
               isSmall={true}
               isOutline={true}
-              onClick={nextImage}
+              onClick={(e) => nextImage(e)}
             >
               <FaAngleRight size={20} />
             </IconBox>

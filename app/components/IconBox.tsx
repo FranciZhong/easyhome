@@ -4,7 +4,7 @@ interface Props {
   useDark: boolean;
   isSmall?: boolean;
   isOutline?: boolean;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
   children: any;
 }
 
